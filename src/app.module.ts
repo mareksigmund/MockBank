@@ -11,6 +11,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtGlobalGuard } from './auth/jwt-global.guard';
 import { envSchema } from './config/env.validation';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { IntegrationsModule } from './integrations/integrations.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     WebhooksModule,
     UsersModule,
     AuthModule,
+    IntegrationsModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: JwtGlobalGuard }],
