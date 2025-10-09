@@ -94,8 +94,13 @@ export class AccountsService implements OnModuleInit {
         createdAt: created.createdAt,
         updatedAt: created.updatedAt,
       };
-    } catch (err: any) {
-      if (err?.code === 11000) {
+    } catch (err: unknown) {
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'code' in err &&
+        (err as { code?: unknown }).code === 11000
+      ) {
         throw new ConflictException('Account with this IBAN already exists');
       }
       throw err;
